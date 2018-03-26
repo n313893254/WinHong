@@ -13,6 +13,7 @@ export default Ember.Controller.extend({
       {route: 'admin-tab.auth.localauth',       label: 'Local',             css: 'local',           available: this.hasRecord('localauthconfig')  },
       {route: 'admin-tab.auth.openldap',        label: 'OpenLDAP',          css: 'openldap',        available: this.hasRecord('openldapconfig')  },
       {route: 'admin-tab.auth.shibboleth',      label: 'Shibboleth',        css: 'shibboleth',      available: this.hasRecord('shibbolethconfig')  },
+      {route: 'admin-tab.auth.yunhong',         label: 'YunHong',           css: 'yunhong',          available: this.hasRecord('yunhongconfig')  },
     ];
   }.property(),
 

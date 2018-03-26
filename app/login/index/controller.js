@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
   isLocal           : Ember.computed.equal('access.provider', 'localauthconfig'),
   isAzureAd         : Ember.computed.equal('access.provider', 'azureadconfig'),
   isShibboleth      : Ember.computed.equal('access.provider', 'shibbolethconfig'),
+  isYunhong         : Ember.computed.equal('access.provider', 'yunhongconfig'),
 
   timedOut          : false,
   waiting           : false,

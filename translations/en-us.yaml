@@ -366,6 +366,40 @@ authPage:
       buttonText:
         pre: Enable Local Auth
         post: 'Enabling...'
+  winhong:
+    header:
+      enabled: 'WinHong Authentication is <b>enabled</b>'
+      disabled:
+        label: 'WinHong Authentication is <b class="text-warning">not configured</b>'
+        warning: "{appName} can be configured to restrict access to a set of WinHong users and organization members.  This is not currently set up, so anybody that reach this page (or the API) has full control over the system."
+    subtext:
+      disabled: "{appName} can be configured to restrict access to a set of WinHong users and organization members.  This is not currently set up, so anybody that reach this page (or the API) has full control over the system."
+      enabled: "{appName} is configured to allow access to any WinHong user."
+    accessDisabled:
+      header: 'Setup a WinHong Address'
+      helpText: 'This user will become the admin that has full control over {appName}'
+      form:
+        casServerAddress:
+          labelText: 'CaaS server address'
+          placeholder: 'e.g.: www.poi.com'
+        casServiceUrl:
+          labelText: '系统地址'
+          placeholder: '例如: www.yamato.com'
+        casServiceId:
+          labelText: 'system ID'
+          placeholder: 'e.g.: poi'
+    accessControl:
+      header: 'Test and enable authentication'
+      helpText: 'Click to enable access control and log in.'
+      buttonText:
+        pre: Enable WinHong Auth
+        post: 'Enabling...'
+    accessEnabled:
+      header: 'Danger Zone&trade;'
+      warning: '<b class="text-danger">Caution:</b> Disabling access control will give complete control over {appName} to anyone that can reach this page or the API.'
+      buttonText:
+        disable: 'Are you sure?  Click again to really disable access control'
+        prompt: Disable access control
 
 backupTargetsPage:
   header: Backup Targets

@@ -40,6 +40,7 @@ Router.map(function() {
         this.route('openldap');
         this.route('localauth', {path: 'local'});
         this.route('shibboleth');
+        this.route('yunhong');
       });
 
       this.route('settings');

@@ -1,0 +1,69 @@
+<section class="well">
+  <h2>{{headerText}}</h2>
+  <div>
+    {{#if access.enabled}}
+      {{t 'authPage.winhong.subtext.enabled' appName=settings.appName}}
+    {{else}}
+      {{t 'authPage.winhong.subtext.disabled' appName=settings.appName}}
+    {{/if}}
+  </div>
+</section>
+
+{{#if access.enabled}}
+  <section class="well">
+    <h3>{{format-html-message 'authPage.winhong.accessEnabled.header'}}</h3>
+    <hr/>
+
+    <p>
+      {{format-html-message 'authPage.winhong.accessEnabled.warning' appName=settings.appName}}
+    </p>
+
+    {{#if confirmDisable}}
+      <button class="btn btn-danger" {{action "disable"}}>
+        <i class="icon icon-alert"></i> {{t 'authPage.winhong.accessEnabled.buttonText.disable'}}
+      </button>
+    {{else}}
+      <button class="btn btn-danger" {{action "promptDisable"}}>
+        <i class="icon icon-umbrella"></i> {{t 'authPage.winhong.accessEnabled.buttonText.prompt'}}
+      </button>
+    {{/if}}
+
+  </section>
+{{/if}}
+
+{{#unless access.enabled}}
+  <section class="well">
+    <h3>{{t 'authPage.winhong.accessDisabled.header'}}</h3>
+    <hr/>
+    {{!-- <p class="help-block">{{t 'authPage.winhong.accessDisabled.helpText' appName=settings.appName}}</p> --}}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{t 'authPage.winhong.accessDisabled.form.casServerAddress.labelText'}}*</label>
+          {{input type="text" value=casServerAddress placeholder=(t 'authPage.winhong.accessDisabled.form.casServerAddress.placeholder') classNames="form-control"}}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>{{t 'authPage.winhong.accessDisabled.form.casServiceId.labelText'}}*</label>
+          {{input type="text" value=casServiceId placeholder=(t 'authPage.winhong.accessDisabled.form.casServiceId.placeholder') classNames="form-control"}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="well">
+    <h3>{{t 'authPage.winhong.accessControl.header'}}</h3>
+    <hr/>
+    <p class="help-block">{{t 'authPage.localAuth.accessControl.helpText'}}</p>
+    {{top-errors errors=errors}}
+
+    <button class="btn btn-primary" style="display: block" {{action "test"}}>
+      {{#if testing}}
+        <i class="icon icon-spinner icon-spin"></i> {{t 'authPage.winhong.accessControl.buttonText.post'}}
+      {{else}}
+        {{t 'authPage.winhong.accessControl.buttonText.pre'}}
+      {{/if}}
+    </button>
+  </section>
+{{/unless}}

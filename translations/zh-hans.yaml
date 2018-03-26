@@ -355,6 +355,40 @@ authPage:
       buttonText:
         pre: 启用本地验证
         post: '启用中...'
+  winhong:
+    header:
+      enabled: '云宏验证 <b class="text-warning">已设置</b>'
+      disabled:
+        label: '云宏验证 <b class="text-warning">未设置</b>'
+        warning: "{appName} 可以设置为允许一组 WinHong 用户和组织成员访问。 由于当前未完成此设置，所以任何可以访问此页面(或API)的用户都对系统有完全控制权限。"
+    subtext:
+      disabled: "{appName} 可以设置为允许一组 WinHong 用户和组织成员访问。 由于当前未完成此设置，所以任何可以访问此页面(或API)的用户都对系统有完全控制权限。"
+      enabled: "{appName} 已被设置为允许任何 WinHong 用户访问."
+    accessDisabled:
+      header: '设置云宏验证地址'
+      helpText: '该账户将成为管理员并拥有对 {appName} 的完全控制权限'
+      form:
+        casServerAddress:
+          labelText: '统一认证平台服务器地址'
+          placeholder: '例如: www.poi.com'
+        casServiceUrl:
+          labelText: '系统地址'
+          placeholder: '例如: www.yamato.com'
+        casServiceId:
+          labelText: '系统ID'
+          placeholder: '例如: poi'
+    accessControl:
+      header: '测试并使用云宏验证'
+      helpText: '点击以开启云宏验证并登陆'
+      buttonText:
+        pre: 启用云宏验证
+        post: '启用中...'
+    accessEnabled:
+      header: '危险区域&trade;'
+      warning: '<b class="text-danger">警告:</b> 禁用访问控制将导致任何能够访问此页面或API的用户拥有对  {appName}  的完全控制权限。'
+      buttonText:
+        disable: '确认? 再次点击将关闭访问控制。'
+        prompt: 关闭访问控制
 
 backupTargetsPage:
   header: 备份目标

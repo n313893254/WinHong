@@ -7,7 +7,7 @@
 <td data-title="{{t 'accountsPage.index.table.kind'}}:" >
   {{t (concat-str 'model.account.kind.' model.kind character='')}}
 </td>
-{{#if isLocal}}
+{{#if (or isLocal isYunhong)}}
   <td data-title="{{t 'accountsPage.index.table.username'}}:" >
     {{#if model.username}}
       {{model.username}}

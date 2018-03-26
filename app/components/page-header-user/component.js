@@ -12,6 +12,10 @@ export default Ember.Component.extend({
   isLocalAuth: function() {
     return this.get('access.enabled') && this.get('access.provider') === 'localauthconfig';
   }.property('access.{enabled,provider}'),
+  
+  isYunhongAuth: function() {
+    return this.get('access.enabled') && this.get('access.provider') === 'yunhongconfig';
+  }.property('access.{enabled,provider}'),
 
   actions: {
     changePassword() {
