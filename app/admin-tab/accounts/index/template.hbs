@@ -13,9 +13,13 @@
         {{sortable-th sortable=this action="changeSort" name="state" label="generic.state" width="125"}}
         {{sortable-th sortable=this action="changeSort" name="id" label="generic.id" width="120"}}
         {{sortable-th sortable=this action="changeSort" name="kind" label="accountsPage.index.table.kind" width="120"}}
-        {{#if isLocal}}
-          {{sortable-th sortable=this action="changeSort" name="username" label="accountsPage.index.table.username"}}
-          {{sortable-th sortable=this action="changeSort" name="name" label="generic.name"}}
+        {{#if (or isLocal isYunhongAuth)}}
+          {{#if isLocal}}
+            {{sortable-th sortable=this action="changeSort" name="username" label="accountsPage.index.table.username"}}
+            {{sortable-th sortable=this action="changeSort" name="name" label="generic.name"}}
+          {{else}}
+            {{sortable-th sortable=this action="changeSort" name="username" label="accountsPage.index.table.username"}}
+          {{/if}}
         {{else}}
           <th>{{t 'accountsPage.index.table.identity'}}</th>
         {{/if}}
@@ -24,11 +28,10 @@
     </thead>
     <tbody>
       {{#each arranged as |account|}}
-        {{account-row model=account isLocal=isLocal}}
+        {{account-row model=account isLocal=isLocal isYunhongAuth=isYunhongAuth}}
       {{else}}
         <tr><td colspan="{{if isLocal '6' '5'}}" class="text-center text-muted">{{t 'accountsPage.index.table.noData'}}</td></tr>
       {{/each}}
     </tbody>
   </table>
 </section>
-

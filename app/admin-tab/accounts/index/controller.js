@@ -29,4 +29,7 @@ export default Ember.Controller.extend(FilterState, Sortable, {
   isLocal: function() {
     return this.get('access.provider') === 'localauthconfig';
   }.property('access.provider'),
+  isYunhongAuth: function() {
+    return this.get('access.provider') === 'yunhongconfig';
+  }.property('access.provider'),
 });
