@@ -37,7 +37,7 @@ export default Ember.Controller.extend({
         allowedIdentities   : [],
         yunhongConfig: {
           casServerAddress: this.get('casServerAddress'),
-          casServiceUrl: window.location.origin,
+          casServiceUrl: window.location.origin + '/',
           casServiceId: this.get('casServiceId'),
           type: 'yunhongconfig',
         }
