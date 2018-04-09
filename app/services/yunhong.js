@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import C from 'ui/utils/constants';
 import Util from 'ui/utils/util';
 
 export default Ember.Service.extend({
@@ -20,21 +19,21 @@ export default Ember.Service.extend({
       })
       .catch((err) => {
         reject(err);
-      })
-    })
+      });
+    });
   },
 
   getAuthorizeUrl: function(test) {
-    this.getToken().then((token) => {
-      var url = this.get('access.token.redirectUrl')
+    this.getToken().then(() => {
+      var url = this.get('access.token.redirectUrl');
 
       if (test) {
-        url += '?isTest=true'
-        
+        url += '?isTest=true';
+
       }
-      console.log(url)
+      console.log(url);
       return url;
-    })
+    });
   },
 
   authorizeTest: function(cb) {
@@ -47,13 +46,12 @@ export default Ember.Service.extend({
     };
 
     this.getToken().then((token) => {
-      var url = token.redirectUrl
+      var url = token.redirectUrl;
 
-      url += '?isTest=true'
+      url += '?isTest=true';
       
-      console.log(url)
       var popup = window.open(url, 'rancherAuth', Util.popupWindowOptions());
-      
+
       var timer = setInterval(function() {
         if ( !popup || popup.closed ) {
           clearInterval(timer);
@@ -63,6 +61,6 @@ export default Ember.Service.extend({
           }
         }
       }, 500);
-    })
+    });
   },
 });

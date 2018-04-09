@@ -111,9 +111,9 @@ export default Ember.Route.extend({
         }
 
         if (this.get('access.token.authProvider') === 'yunhongconfig') {
-          let url = this.get('access.token.redirectUrl')
-          let logoutUrl = url.slice(0, url.indexOf('login')) + 'logout'
-          window.location.href = logoutUrl
+          let url = this.get('access.token.redirectUrl');
+          let logoutUrl = url.slice(0, url.indexOf('login')) + 'logout';
+          window.location.href = logoutUrl;
         }
         this.transitionTo('login', params);
       });
@@ -150,7 +150,6 @@ export default Ember.Route.extend({
   },
 
   getUrlVars: function() {
-    var vars = [], hash;
     let obj = {};
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     hashes.map(h => {

@@ -41,11 +41,11 @@ export default Ember.Controller.extend({
           casServiceId: this.get('casServiceId'),
           type: 'yunhongconfig',
         }
-      })
+      });
 
       this.get('model').save().then(() => {
         setTimeout(() => {
-          this.get('yunhong').getToken().then((resp) => {
+          this.get('yunhong').getToken().then(() => {
             this.get('yunhong').authorizeTest((err,code) => {
 
               if ( err )
@@ -59,11 +59,11 @@ export default Ember.Controller.extend({
                 this.set('testing', false);
               }
             });
-          })
-        }, 1000)
+          });
+        }, 1000);
       }).catch(err => {
-        this.send('gotError', err)
-      })
+        this.send('gotError', err);
+      });
     },
 
     gotCode: function(code) {
