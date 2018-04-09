@@ -111,8 +111,9 @@ export default Ember.Route.extend({
         }
 
         if (this.get('access.token.authProvider') === 'yunhongconfig') {
-          // this.get('cookies').remove('token')
-          window.location.href = this.get('access.token.redirectUrl')
+          let url = this.get('access.token.redirectUrl')
+          let logoutUrl = url.slice(0, url.indexOf('login')) + 'logout'
+          window.location.href = logoutUrl
         }
         this.transitionTo('login', params);
       });
