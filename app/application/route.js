@@ -155,15 +155,15 @@ export default Ember.Route.extend({
     hashes.map(h => {
       let key = h.split('=')[0];
       let value = h.split('=')[1];
-      obj = {...obj, [key]: value};
-    })
+      Object.assign(obj, {[key]: value});
+    });
     return obj;
   },
 
   model(params, transition) {
     let github   = this.get('github');
     let stateMsg = 'Authorization state did not match, please try again.';
-    let token = this.get('access').token
+    let token = this.get('access').token;
 
     this.get('language').initLanguage();
 
@@ -188,9 +188,8 @@ export default Ember.Route.extend({
     }
 
     if (params.isTest && token.authProvider === 'yunhongconfig') {
-      let queryParams = this.getUrlVars()
+      let queryParams = this.getUrlVars();
       yunhongReply(params.error_description, queryParams);
-
 
       transition.abort();
 
@@ -198,11 +197,11 @@ export default Ember.Route.extend({
     }
 
     if (token.authProvider === 'yunhongconfig' && token.security) {
-      let queryParams = this.getUrlVars()
+      let queryParams = this.getUrlVars();
 
-      return this.get('access').yunHongLogin({...queryParams}).then((res) => {
+      return this.get('access').yunHongLogin(queryParams).then((res) => {
         if (!res) {
-          window.location.href = this.get('access.token.redirectUrl')
+          window.location.href = this.get('access.token.redirectUrl');
         }
       }).catch((err) => {
         transition.abort();
