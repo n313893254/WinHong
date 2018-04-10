@@ -163,12 +163,11 @@ export default Ember.Service.extend({
 
   yunHongLogin(obj) {
     var session = this.get('session');
-    Object.assign(obj, {authProvider: this.get('provider')});
+    Object.assign(obj, {authProvider: 'yunhongconfig'});
     return this.get('userStore').rawRequest({
       url: 'token',
       method: 'POST',
       data: {
-        // code: JSON.stringify({...obj, authProvider: this.get('provider')}),
         code: JSON.stringify(obj),
       },
     }).then((xhr) => {
