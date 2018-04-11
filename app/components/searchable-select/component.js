@@ -319,7 +319,7 @@ export default Ember.Component.extend({
     }
     this.set('filter', this.get('displayLabel'));
     // https://stackoverflow.com/questions/39624902/new-input-placeholder-behavior-in-safari-10-no-longer-hides-on-change-via-java
-    Ember.runloop.next(() => {
+    Ember.run.next(() => {
       this.$('.input-search').focus();
       this.$('.input-search').blur();
     })
@@ -386,8 +386,8 @@ export default Ember.Component.extend({
     } else {
       const found = this.get('interContent').filterBy('custom', true).get('firstObject');
       if (found) {
-        set(found, lp, `${value} (Custom)`);
-        set(found, vp, value)
+        Ember.set(found, lp, `${value} (Custom)`);
+        Ember.set(found, vp, value)
       }
     }
   },

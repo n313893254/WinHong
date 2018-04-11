@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   checking: false,
   addInput: '',
   allIdentities: null,
+  choices: [],
   showDropdown: function() {
     return this.get('access.provider') !== 'localauthconfig';
   }.property('access.provider'),
@@ -90,4 +91,62 @@ export default Ember.Component.extend({
     }
     return intl.formatMessage(out);
   }.property('access.provider', 'intl._locale'),
+
+  choices: Ember.computed('roles.[]', 'allIdentities', function() {
+    // this.get('userStore').find('identity', null, {forceReload: true}).then((res) => {
+    //   let members = []
+    //   res.content.map(i => members.push(`ID: ${i.login} / name: ${i.name}`))
+    //   console.log(members, '00988')
+    //   return members
+    // })
+    let members = []
+    let identities = this.get('allIdentities.content') || []
+    // identities.map(i => members.push(`ID: ${i.login} / 用户名: ${i.name}`))
+    identities.map(i => members.push({label: i.name, value: i.id}))
+    console.log(members)
+    return members
+  })
+
+    // let pt = Ember.get(this, 'pageType');
+    //
+    // let neuRoles = BASIC_ROLES.map((r) => {
+    //
+    //   let val = '';
+    //
+    //   if ( r.value.indexOf('custom') >= 0 ) {
+    //     val = 'custom';
+    //
+    //   } else {
+    //     if (r.value === 'read-only') {
+    //       val = r.value;
+    //     } else {
+    //       val = `${pt}-${r.value}`;
+    //     }
+    //   }
+    //
+    //   return {
+    //     label: r.label,
+    //     value: val,
+    //   };
+    //
+    // });
+    //
+    // if (pt) {
+    //   let customRoles = get(this, 'customRoles').map( r => {
+    //     if (r.id !== 'read-only') {
+    //       return {
+    //         label: r.name,
+    //         value: r.id
+    //       }
+    //     } else {
+    //       return;
+    //     }
+    //   });
+    //
+    //   neuRoles = neuRoles.concat(customRoles);
+    //
+    //   return neuRoles;
+    // }
+
+    // return neuRoles;
 });
