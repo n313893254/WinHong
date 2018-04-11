@@ -1,0 +1,35 @@
+<form {{action "add" on="submit"}}>
+  <div class="input-group">
+
+    {{principal-search
+        add="add"
+        filter=filter
+        includeLocal=includeLocal
+        principal=addInput
+        selectExact="selectExact"
+        selectExactOnBlur=selectExactOnBlur
+        useLabel=true
+    }}
+
+    <div class="input-group-btn">
+      {{#if checking}}
+        <button class="btn btn-primary btn-disabled"><i class="icon icon-spinner icon-spin"></i></button>
+      {{else}}
+        <button class="btn btn-primary" {{action "add"}} disabled={{addDisabled}}><i class="icon icon-plus"></i></button>
+      {{/if}}
+      {{#if showDropdown}}
+        <button type="button" class="btn bg-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon icon-chevron-down"></i></button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu" style="min-width: 250px; max-height: 300px; overflow-y: auto;">
+          <li role="presentation" class="dropdown-header">{{dropdownLabel}}</li>
+            {{#each dropdownChoices as |item|}}
+              <li>
+                <a {{action "addObject" item}}>
+                  {{identity-block principal=item}}
+                </a>
+              </li>
+            {{/each}}
+        </ul>
+      {{/if}}
+    </div>
+  </div>
+</form>

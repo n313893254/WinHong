@@ -62,6 +62,10 @@ export default Ember.Component.extend(NewOrEdit, Sortable, {
     removeMember(item) {
       this.get('project.projectMembers').removeObject(item);
     },
+
+    addAuthorized(principal) {
+      Ember.set(this, 'principal', principal);
+    },
   },
 
   didInsertElement() {
@@ -212,4 +216,50 @@ export default Ember.Component.extend(NewOrEdit, Sortable, {
     this.sendAction('done');
     return out;
   },
+
+  choices: Ember.computed('roles.[]', 'pageType', function() {
+    // let pt = Ember.get(this, 'pageType');
+    //
+    // let neuRoles = BASIC_ROLES.map((r) => {
+    //
+    //   let val = '';
+    //
+    //   if ( r.value.indexOf('custom') >= 0 ) {
+    //     val = 'custom';
+    //
+    //   } else {
+    //     if (r.value === 'read-only') {
+    //       val = r.value;
+    //     } else {
+    //       val = `${pt}-${r.value}`;
+    //     }
+    //   }
+    //
+    //   return {
+    //     label: r.label,
+    //     value: val,
+    //   };
+    //
+    // });
+    //
+    // if (pt) {
+    //   let customRoles = get(this, 'customRoles').map( r => {
+    //     if (r.id !== 'read-only') {
+    //       return {
+    //         label: r.name,
+    //         value: r.id
+    //       }
+    //     } else {
+    //       return;
+    //     }
+    //   });
+    //
+    //   neuRoles = neuRoles.concat(customRoles);
+    //
+    //   return neuRoles;
+    // }
+
+    // return neuRoles;
+    return [{label: '23', value: 'sd'},{label: '23223', value: 's23d'}]
+  }),
 });

@@ -1,0 +1,93 @@
+.searchable-select {
+  $group-indent: 20px;
+  $indent: 20px;
+  padding-left: 0;
+  padding-right: 0;
+
+  .input-arrow {
+    position: relative;
+    background-image: url(images/dropdown-arrow.svg);
+    background-repeat: no-repeat;
+    background-size: 15px 10px;
+    background-position: calc(100% - 10px) center;
+  }
+
+  &.show-dropdown-arrow {
+    .input-search {
+      @extend .input-arrow;
+      &:hover{
+        @extend .input-arrow;
+      }
+      &:focus{
+        @extend .input-arrow;
+      }
+    }
+  }
+  .searchable-option-active {
+    background: $link-hover-color;
+    color: white;
+  }
+
+  font-family: prompt;
+  position: relative;
+  color: $text-color;
+
+  .searchable-group {
+    .group-label {
+      color: $text-muted;
+      padding-left: $indent;
+      font-weight: bold;
+    }
+    > div {
+      padding-left: $indent + $group-indent;
+    }
+  }
+
+  .searchable-options {
+    overflow-y: scroll;
+    background: $dropdown-bg;
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 999;
+    border: 1px solid $accent-border;
+    border-top: none;
+
+    @expand .dropdown-menu;
+
+    input {
+      margin-bottom: 10px;
+      border-left: none;
+      border-right: none;
+      border-color: $input-border;
+      background: $input-bg;
+    }
+    input:hover {
+      border-color: $input-border;
+      background: $input-bg;
+    }
+  }
+  .searchable-option, .searchable-prompt {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    padding: 0px 0;
+    padding-left: $indent;
+    position: relative;
+    border-width: 0 1px 1px 1px;
+    border-color: $border;
+    border-style: solid;
+    padding: 8px 18px;
+    font-size: 14px;
+
+    .icon-check {
+      margin-left: -15px;
+      margin-right: 5px;
+      font-size: 10px;
+    }
+  }
+  .no-match {
+    padding-left: $indent;
+  }
+}

@@ -3517,3 +3517,5 @@ model:
     min: 最小数量
     max: 最大数量
     amount: 以
+searchableSelect:
+  noOptions: 无可选项

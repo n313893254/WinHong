@@ -19,19 +19,17 @@
  * }
  *
 **/
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { next } from '@ember/runloop';
-import { get, set, computed, observer } from '@ember/object';
+import Ember from 'ember';
+// import { get, set, computed, observer } from '@ember/object';
 import C from 'ui/utils/constants';
 import layout from './template';
-import { htmlSafe } from '@ember/string';
-import { on } from '@ember/object/evented';
+// import { htmlSafe } from '@ember/string';
+// import { on } from '@ember/object/evented';
 const MAX_HEIGHT = 285;
 
-export default Component.extend({
+export default Ember.Component.extend({
   layout,
-  intl: service(),
+  intl: Ember.inject.service(),
 
   classNames: ['searchable-select'],
   classNameBindings: ['class', 'showDropdownArrow'],
@@ -135,16 +133,16 @@ export default Component.extend({
     this.off();
   },
 
-  optionsMaxHeightCss: computed('maxHeight', function() {
-    return htmlSafe('max-height: ' + this.get('maxHeight') + 'px');
+  optionsMaxHeightCss: Ember.computed('maxHeight', function() {
+    return Ember.String.htmlSafe('max-height: ' + this.get('maxHeight') + 'px');
   }),
 
   // Show option image --> unGroupedContent only
-  showOptionIcon: computed('unGroupedContent.@each.imgUrl', function () {
+  showOptionIcon: Ember.computed('unGroupedContent.@each.imgUrl', function () {
     return this.get('unGroupedContent').some(item => !!item.imgUrl);
   }),
 
-  displayLabel: computed('value', 'prompt', 'interContent.[]', function () {
+  displayLabel: Ember.computed('value', 'prompt', 'interContent.[]', function () {
     const value = this.get('value');
     if (!value) {
       return null;
@@ -155,7 +153,7 @@ export default Component.extend({
     const selectedItem = this.get('interContent').filterBy(vp, value).get('firstObject');
 
     if (selectedItem) {
-      let label = get(selectedItem, lp);
+      let label = Ember.get(selectedItem, lp);
       if (this.get('localizedLabel')) {
         label = this.get('intl').t(label);
       }
@@ -164,7 +162,7 @@ export default Component.extend({
     return null;
   }),
 
-  filtered: computed('filter', 'interContent.[]', function() {
+  filtered: Ember.computed('filter', 'interContent.[]', function() {
     const filter = (this.get('filter') || '').trim();
     const options = this.get('interContent');
     if (this.get('allowCustom')) {
@@ -178,8 +176,8 @@ export default Component.extend({
         const filterTerms = filter.split(/\s+/);
         const gp = this.get('optionGroupPath');
         const lp = this.get('optionLabelPath');
-        const group = get(option, gp);
-        const label = get(option, lp);
+        const group = Ember.get(option, gp);
+        const label = Ember.get(option, lp);
 
         let startsWithOneOfFilterTerm = false;
         let containsEveryFilterTerm = true;
@@ -211,11 +209,11 @@ export default Component.extend({
     }
   }),
 
-  unGroupedContent: computed('filtered.[]', function () {
+  unGroupedContent: Ember.computed('filtered.[]', function () {
     const groupPath = this.get('optionGroupPath');
     const out = [];
     this.get('filtered').forEach((opt) => {
-      const key = get(opt, groupPath);
+      const key = Ember.get(opt, groupPath);
       if (!key) {
         out.push(opt);
       }
@@ -223,11 +221,11 @@ export default Component.extend({
     return out;
   }),
 
-  groupedContent: computed('filtered.[]', function () {
+  groupedContent: Ember.computed('filtered.[]', function () {
     const groupPath = this.get('optionGroupPath');
     const out = [];
     this.get('filtered').forEach(opt => {
-      const key = get(opt, groupPath);
+      const key = Ember.get(opt, groupPath);
       if (key) {
         let group = out.filterBy('group', key)[0];
         if (!group) {
@@ -249,12 +247,12 @@ export default Component.extend({
     return out;
   },
 
-  showMessage: computed('filtered.[]', function() {
-    return get(this, 'filtered.length') === 0;
+  showMessage: Ember.computed('filtered.[]', function() {
+    return Ember.get(this, 'filtered.length') === 0;
   }),
 
-  missingMessage: computed('content.[]', function() {
-    let len = get(this, 'content.length')
+  missingMessage: Ember.computed('content.[]', function() {
+    let len = Ember.get(this, 'content.length')
     let out = 'searchableSelect.noOptions';
 
     if (len) {
@@ -315,13 +313,13 @@ export default Component.extend({
     const gp = this.get('optionGroupPath');
     const vp = this.get('optionValuePath');
 
-    this.set('value', get(item, vp));
-    if (gp && get(item, gp)) {
-      this.set('group', get(item, gp));
+    this.set('value', Ember.get(item, vp));
+    if (gp && Ember.get(item, gp)) {
+      this.set('group', Ember.get(item, gp));
     }
     this.set('filter', this.get('displayLabel'));
     // https://stackoverflow.com/questions/39624902/new-input-placeholder-behavior-in-safari-10-no-longer-hides-on-change-via-java
-    next(() => {
+    Ember.runloop.next(() => {
       this.$('.input-search').focus();
       this.$('.input-search').blur();
     })
@@ -329,7 +327,7 @@ export default Component.extend({
     this.send('hide');
   },
 
-  showOptionsChanged: on('init', observer('showOptions', function () {
+  showOptionsChanged: Ember.on('init', Ember.observer('showOptions', function () {
     const show = this.get('showOptions');
     if (show) {
       this.on();
