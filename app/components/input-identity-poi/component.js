@@ -20,31 +20,32 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    add: function() {
-      if ( this.get('checking') )
-      {
-        return;
-      }
-
-      this.set('checking', true);
-      var input = this.get('addInput').trim();
-
-      this.get('userStore').find('identity', null, {filter: {name: input}}).then((info) => {
-        var obj = info.objectAt(0);
-        if (obj)
-        {
-          this.set('addInput','');
-          this.send('addObject', obj);
-        }
-        else
-        {
-          this.sendAction('onError','Identity not found: ' + input);
-        }
-      }).catch(() => {
+    add: function(member) {
+      let identities = this.get('allIdentities.content') || []
+      let res = identities.filter(i => i.id === member.value)[0] || null
+      if (res) {
+        this.set('addInput','');
+        this.send('addObject', res);
+      } else {
         this.sendAction('onError','Identity not found: ' + input);
-      }).finally(() => {
-        this.set('checking', false);
-      });
+      }
+      // var input = this.get('addInput').trim();
+      // this.get('userStore').find('identity', null, {filter: {name: member.label}}).then((info) => {
+      //   var obj = info.objectAt(0);
+      //   if (obj)
+      //   {
+      //     this.set('addInput','');
+      //     this.send('addObject', obj);
+      //   }
+      //   else
+      //   {
+      //     this.sendAction('onError','Identity not found: ' + input);
+      //   }
+      // }).catch(() => {
+      //   this.sendAction('onError','Identity not found: ' + input);
+      // }).finally(() => {
+      //   this.set('checking', false);
+      // });
     },
 
     addObject: function(info) {
