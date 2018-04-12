@@ -237,6 +237,7 @@ var C = {
     TYPE_OPENLDAP_GROUP:  'openldap_group',
     TYPE_SHIBBOLETH_USER:       'shibboleth_user',
     TYPE_SHIBBOLETH_GROUP:      'shibboleth_group',
+    TYPE_YUNHONG_USER:     'yunhong_user',
 
     PERSON: 'person',
     TEAM: 'team',

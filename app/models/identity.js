@@ -93,6 +93,8 @@ var Identity = Resource.extend({
       case C.PROJECT.TYPE_RANCHER:
         key = 'model.identity.displayType.localUser';
         break;
+      case C.PROJECT.TYPE_YUNHONG_USER:
+        key = 'model.identity.displayType.yunhongUser'
     }
 
     return this.get('intl').t(key, {type: type});
