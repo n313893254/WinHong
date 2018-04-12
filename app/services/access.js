@@ -187,11 +187,18 @@ export default Ember.Service.extend({
 
       session.setProperties(interesting);
       return xhr;
-    }).catch(() => {
-      return this.get('userStore').rawRequest({
-        url: 'token',
-      }).then(() => {
-      });
+    }).catch((res) => {
+      let err;
+      try {
+        err = res.body;
+      } catch(e) {
+        err = {type: 'error', message: 'Error logging in'};
+      }
+      return Ember.RSVP.reject(err);
+      // return this.get('userStore').rawRequest({
+      //   url: 'token',
+      // }).then(() => {
+      // });
     });
   },
 

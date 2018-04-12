@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:7
 RUN mkdir /source
 WORKDIR /source
 COPY package.json bower.json ./

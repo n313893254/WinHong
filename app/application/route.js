@@ -204,8 +204,7 @@ export default Ember.Route.extend({
           window.location.href = this.get('access.token.redirectUrl');
         }
       }).catch((err) => {
-        transition.abort();
-        this.transitionTo('login', {queryParams: { errorMsg: err.message}});
+        window.location.href = this.get('access.token.redirectUrl');
       }).finally(() => {
         this.controllerFor('application').setProperties({
           state: null,
