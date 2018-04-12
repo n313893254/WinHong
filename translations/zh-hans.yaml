@@ -3506,6 +3506,7 @@ model:
       group: 组
       org: 组织
       localUser: 本地用户
+      yunhong_user: 云宏用户
       unknown: "{type}?"
   projectMember:
     role:
