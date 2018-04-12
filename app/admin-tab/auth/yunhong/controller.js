@@ -68,7 +68,6 @@ export default Ember.Controller.extend({
 
     gotCode: function(code) {
       this.get('access').yunHongLogin(code).then(res => {
-        console.log(res, '11111')
         if (!res) {
           this.send('showError', '云宏验证失败');
           this.set('testing', false);
@@ -77,7 +76,6 @@ export default Ember.Controller.extend({
           this.send('authenticationSucceeded', res.body);
         }
       }).catch(res => {
-        console.log(res, '0000000')
         if (res.status === 403) {
           this.send('showError', '首次登陆需以管理员身份进入以初始化运行环境');
         } else {

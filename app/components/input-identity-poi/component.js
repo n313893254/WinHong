@@ -14,14 +14,15 @@ export default Ember.Component.extend({
   }.property('access.provider'),
 
   init: function() {
-    this.set('allIdentities', this.get('userStore').all('identity'));
-    this.get('userStore').findAll('identity');
+    // this.set('allIdentities', this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).then(res => console.log(res)));
+    // this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).the
+    this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).then(res => this.set('allIdentities', res.content))
     this._super();
   },
 
   actions: {
     add: function(member) {
-      let identities = this.get('allIdentities.content') || []
+      let identities = this.get('allIdentities') || []
       let res = identities.filter(i => i.id === member.value)[0] || null
       if (res) {
         this.set('addInput','');
@@ -29,23 +30,6 @@ export default Ember.Component.extend({
       } else {
         this.sendAction('onError','Identity not found: ' + input);
       }
-      // var input = this.get('addInput').trim();
-      // this.get('userStore').find('identity', null, {filter: {name: member.label}}).then((info) => {
-      //   var obj = info.objectAt(0);
-      //   if (obj)
-      //   {
-      //     this.set('addInput','');
-      //     this.send('addObject', obj);
-      //   }
-      //   else
-      //   {
-      //     this.sendAction('onError','Identity not found: ' + input);
-      //   }
-      // }).catch(() => {
-      //   this.sendAction('onError','Identity not found: ' + input);
-      // }).finally(() => {
-      //   this.set('checking', false);
-      // });
     },
 
     addObject: function(info) {
@@ -93,7 +77,7 @@ export default Ember.Component.extend({
     return intl.formatMessage(out);
   }.property('access.provider', 'intl._locale'),
 
-  choices: Ember.computed('roles.[]', 'allIdentities', function() {
+  choices: Ember.computed('allIdentities', function() {
     // this.get('userStore').find('identity', null, {forceReload: true}).then((res) => {
     //   let members = []
     //   res.content.map(i => members.push(`ID: ${i.login} / name: ${i.name}`))
@@ -101,7 +85,9 @@ export default Ember.Component.extend({
     //   return members
     // })
     let members = []
-    let identities = this.get('allIdentities.content') || []
+    console.log(this.get('allIdentities'), '9999999')
+    console.log(this.get('allIdentities'), '88888')
+    let identities = this.get('allIdentities') || []
     // identities.map(i => members.push(`ID: ${i.login} / 用户名: ${i.name}`))
     identities.map(i => members.push({label: i.name, value: i.id}))
     console.log(members)
