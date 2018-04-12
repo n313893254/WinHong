@@ -14,8 +14,6 @@ export default Ember.Component.extend({
   }.property('access.provider'),
 
   init: function() {
-    // this.set('allIdentities', this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).then(res => console.log(res)));
-    // this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).the
     this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).then(res => this.set('allIdentities', res.content))
     this._super();
   },
@@ -23,7 +21,7 @@ export default Ember.Component.extend({
   actions: {
     add: function(member) {
       let identities = this.get('allIdentities') || []
-      let res = identities.filter(i => i.id === member.value)[0] || null
+      let res = identities.filter(i => i.login === member.value)[0] || null
       if (res) {
         this.set('addInput','');
         this.send('addObject', res);
@@ -78,62 +76,11 @@ export default Ember.Component.extend({
   }.property('access.provider', 'intl._locale'),
 
   choices: Ember.computed('allIdentities', function() {
-    // this.get('userStore').find('identity', null, {forceReload: true}).then((res) => {
-    //   let members = []
-    //   res.content.map(i => members.push(`ID: ${i.login} / name: ${i.name}`))
-    //   console.log(members, '00988')
-    //   return members
-    // })
     let members = []
-    console.log(this.get('allIdentities'), '9999999')
-    console.log(this.get('allIdentities'), '88888')
     let identities = this.get('allIdentities') || []
-    // identities.map(i => members.push(`ID: ${i.login} / 用户名: ${i.name}`))
-    identities.map(i => members.push({label: i.name, value: i.id}))
+    identities.map(i => members.push({label: i.login, value: i.login}))
     console.log(members)
     return members
   })
 
-    // let pt = Ember.get(this, 'pageType');
-    //
-    // let neuRoles = BASIC_ROLES.map((r) => {
-    //
-    //   let val = '';
-    //
-    //   if ( r.value.indexOf('custom') >= 0 ) {
-    //     val = 'custom';
-    //
-    //   } else {
-    //     if (r.value === 'read-only') {
-    //       val = r.value;
-    //     } else {
-    //       val = `${pt}-${r.value}`;
-    //     }
-    //   }
-    //
-    //   return {
-    //     label: r.label,
-    //     value: val,
-    //   };
-    //
-    // });
-    //
-    // if (pt) {
-    //   let customRoles = get(this, 'customRoles').map( r => {
-    //     if (r.id !== 'read-only') {
-    //       return {
-    //         label: r.name,
-    //         value: r.id
-    //       }
-    //     } else {
-    //       return;
-    //     }
-    //   });
-    //
-    //   neuRoles = neuRoles.concat(customRoles);
-    //
-    //   return neuRoles;
-    // }
-
-    // return neuRoles;
 });
