@@ -3,6 +3,7 @@ import C from 'ui/utils/constants';
 
 export default Ember.Component.extend({
   // Identity or externalId+externalIdType
+  access         : Ember.inject.service(),
   identity          : null,
   externalIdType    : null,
   externalId        : null,
@@ -23,6 +24,10 @@ export default Ember.Component.extend({
 
     if ( !id && eType && eId ) {
      id =`1i!${eType}:${eId}`;
+    }
+
+    if (this.get('access.provider') === 'yunhongconfig') {
+      this.set('avatar', false)
     }
 
     if ( !this.get('identity') )
