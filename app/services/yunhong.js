@@ -49,7 +49,7 @@ export default Ember.Service.extend({
       var url = token.redirectUrl;
 
       url += '?isTest=true';
-      
+
       var popup = window.open(url, 'rancherAuth', Util.popupWindowOptions());
 
       var timer = setInterval(function() {
@@ -62,5 +62,11 @@ export default Ember.Service.extend({
         }
       }, 500);
     });
+  },
+
+  logout: function() {
+    let url = this.get('access.token.redirectUrl');
+    let logoutUrl = url.slice(0, url.indexOf('login')) + 'logout';
+    window.location.href = logoutUrl;
   },
 });

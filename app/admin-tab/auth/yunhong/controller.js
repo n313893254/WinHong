@@ -99,7 +99,7 @@ export default Ember.Controller.extend({
         'allowedIdentities': [auth.userIdentity],
       });
 
-      let url = window.location.href;
+      let url = auth.redirectUrl;
 
       model.save().then(() => {
         // Set this to true so the token will be sent with the request
