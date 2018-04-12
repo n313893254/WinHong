@@ -25,6 +25,8 @@ $accent-one                          : rgba(225,225,225,.05);
 $accent-two                          : $darkestGray;
 $accent-three                        : $blackDark;
 
+$accent-border                       : rgba(#ecf0f1,.05);
+
 
 /*header*/
 $top-row                             : rgba($primary, .75);
@@ -115,6 +117,7 @@ $input-color                         : $text-color;
 
 //** `<input>` border color
 $input-border                        : transparent;
+$input-border-winhong                : #fff;
 //** Border color for textual input addons
 $input-group-addon-border-color      : $input-border;
 
@@ -540,3 +543,6 @@ $k8sGray      : darken(#7d7d7d, 20%);
 $k8sAccent    : $navyTwo;
 $k8sBodyBg    : $navyTwoDark;
 $k8sHeader    : $k8sDarkTeal;
+
+// WinHong
+$border-winhong: #3d3d3d;

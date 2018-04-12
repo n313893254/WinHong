@@ -26,6 +26,8 @@ $accent-one                          : white;
 $accent-two                          : $lightGray;
 $accent-three                        : $midGray;
 
+$accent-border                       : darken(#ecf0f1, 5) !default;
+
 
 /*header*/
 $top-row                             : $primary;
@@ -54,7 +56,7 @@ $table-bg-active                     : $table-bg-hover;
 //** Border color for table and cell borders.
 $table-border-color                  : $lightGray;
 
-/*ButtonsFor each of Bootstrap's buttons, define text, background and border color.*/ 
+/*ButtonsFor each of Bootstrap's buttons, define text, background and border color.*/
 $btn-default-color                   : $midGray;
 $btn-default-bg                      : white;
 $btn-default-border                  : $lightGray;
@@ -111,6 +113,7 @@ $input-bg-disabled                   : $btn-disabled-bg;
 $input-color                         : #393d47;
 //** `<input>` border color
 $input-border                        : #cacbd1;
+$input-border-winhong                : #fff;
 //** Border color for textual input addons
 $input-group-addon-border-color      : $input-border;
 
@@ -529,3 +532,6 @@ $k8sGray      : #7d7d7d;
 $k8sAccent    : white;
 $k8sBodyBg    : #f2f7fa;
 $k8sHeader    : $k8sBlue;
+
+// WinHong
+$border-winhong: #ecf0f1;
