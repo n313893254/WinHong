@@ -61,16 +61,19 @@ export default Ember.Component.extend({
   maxHeight: MAX_HEIGHT,
   showDropdownArrow: true,
 
+  timeout: null,
+
   actions: {
     search() {
+      let timeout = this.get('timeout')
+      if (timeout) {
+        clearTimeout(timeout)
+        this.set('timeout', null)
+      }
       const value = this.get('username')
-      this.get('userStore').find('identity', null, {filter: {name: value}}).then(res => {
-        let members = []
-        let identities = res.content || []
-        identities.map(i => members.push({label: i.login, value: i.login}))
-        console.log(members)
-        this.set('content', members)
-      })
+      this.set('timeout', setTimeout(function() {
+        this.getIdentities(value)
+      }.bind(this), 300))
     },
     selectUnGroupedItem(idx) {
       const found = this.get('unGroupedContent').objectAt(idx);
@@ -407,5 +410,14 @@ export default Ember.Component.extend({
     }
   },
 
+  getIdentities: function (value) {
+    console.log(value)
+    this.get('userStore').find('identity', null, {filter: {name: value}, forceReload: true}).then(res => {
+      let members = []
+      let identities = res.content || []
+      identities.map(i => members.push({label: i.login, value: i.login}))
+      this.set('content', members)
+    })
+  },
 
 });
