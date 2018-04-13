@@ -221,8 +221,6 @@ export default Ember.Component.extend({
   }),
 
   unGroupedContent: Ember.computed('content.[]', function () {
-    const groupPath = this.get('optionGroupPath');
-    const out = [];
     return this.get('content');
   }),
 
