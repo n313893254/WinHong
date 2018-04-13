@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   }.property('access.provider'),
 
   init: function() {
-    this.get('userStore').find('identity', null, {filter: {name: 'yunhong'}}).then(res => this.set('allIdentities', res.content))
+    this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => this.set('allIdentities', res.content))
     this._super();
   },
 
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
         this.set('addInput','');
         this.send('addObject', res);
       } else {
-        this.sendAction('onError','Identity not found: ' + input);
+        this.sendAction('onError','Identity not found: ' + member);
       }
     },
 

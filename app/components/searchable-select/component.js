@@ -106,6 +106,13 @@ export default Ember.Component.extend({
 
   init() {
     this._super();
+    this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => {
+      let members = []
+      let identities = res.content || []
+      identities.map(i => members.push({label: i.login, value: i.login}))
+      console.log(members)
+      this.set('content', members)
+    })
     this.observeContent();
   },
 

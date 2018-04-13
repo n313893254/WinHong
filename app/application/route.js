@@ -164,6 +164,7 @@ export default Ember.Route.extend({
     let github   = this.get('github');
     let stateMsg = 'Authorization state did not match, please try again.';
     let token = this.get('access').token;
+    let queryParams = this.getUrlVars();
 
     this.get('language').initLanguage();
 
@@ -196,8 +197,7 @@ export default Ember.Route.extend({
       return Ember.RSVP.reject('isTest');
     }
 
-    if (token.authProvider === 'yunhongconfig' && token.security) {
-      let queryParams = this.getUrlVars();
+    if (token.authProvider === 'yunhongconfig' && token.security && queryParams.ticket) {
 
       return this.get('access').yunHongLogin(queryParams).then((res) => {
         if (!res) {
