@@ -55,14 +55,22 @@ export default Ember.Component.extend({
   allowCustom: false,
   filter: null,
   clientSideFiltering: true,
+  username: null,
   // the current highlighted option.
   $activeTarget: null,
   maxHeight: MAX_HEIGHT,
   showDropdownArrow: true,
 
   actions: {
-    search(/*term*/) {
-      //placeholder is over written by extenders if you want
+    search() {
+      const value = this.get('username')
+      this.get('userStore').find('identity', null, {filter: {name: value}}).then(res => {
+        let members = []
+        let identities = res.content || []
+        identities.map(i => members.push({label: i.login, value: i.login}))
+        console.log(members)
+        this.set('content', members)
+      })
     },
     selectUnGroupedItem(idx) {
       const found = this.get('unGroupedContent').objectAt(idx);
@@ -106,13 +114,13 @@ export default Ember.Component.extend({
 
   init() {
     this._super();
-    this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => {
-      let members = []
-      let identities = res.content || []
-      identities.map(i => members.push({label: i.login, value: i.login}))
-      console.log(members)
-      this.set('content', members)
-    })
+    // this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => {
+    //   let members = []
+    //   let identities = res.content || []
+    //   identities.map(i => members.push({label: i.login, value: i.login}))
+    //   console.log(members)
+    //   this.set('content', members)
+    // })
     this.observeContent();
   },
 

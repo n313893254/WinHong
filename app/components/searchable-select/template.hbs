@@ -1,21 +1,12 @@
 {{#outside-click onOutsideClick=(action 'hide')}}
-  <div class="input-group">
-    {{input disabled=readOnly
-            class=(concat 'form-control input-search search ' class)
-            placeholder=placeholder
-            type="text"
-            autocomplete="off"
-            value=filter
-            key-up="search"
-    }}
-    <div class="input-group-btn">
-      {{#if checking}}
-        <button class="btn btn-primary btn-disabled"><i class="icon icon-spinner icon-spin"></i></button>
-      {{else}}
-        <button class="btn btn-primary" {{action "add"}} disabled={{addDisabled}}><i class="icon icon-plus"></i></button>
-      {{/if}}
-    </div>
-  </div>
+  {{input disabled=readOnly
+          class=(concat 'form-control input-search search ' class)
+          placeholder=placeholder
+          type="text"
+          autocomplete="off"
+          value=username
+          key-up="search"
+  }}
 
   {{#if showOptions}}
     <section class="searchable-options" style={{optionsMaxHeightCss}}>

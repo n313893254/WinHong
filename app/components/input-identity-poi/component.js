@@ -14,20 +14,22 @@ export default Ember.Component.extend({
   }.property('access.provider'),
 
   init: function() {
-    this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => this.set('allIdentities', res.content))
     this._super();
   },
 
   actions: {
     add: function(member) {
-      let identities = this.get('allIdentities') || []
-      let res = identities.filter(i => i.login === member.value)[0] || null
-      if (res) {
-        this.set('addInput','');
-        this.send('addObject', res);
-      } else {
-        this.sendAction('onError','Identity not found: ' + member);
-      }
+      this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => {
+        this.set('allIdentities', res.content)
+        let identities = this.get('allIdentities') || []
+        let identity = identities.filter(i => i.login === member.value)[0] || null
+        if (identity) {
+          this.set('addInput','');
+          this.send('addObject', identity);
+        } else {
+          this.sendAction('onError','Identity not found: ' + identity);
+        }
+      })
     },
 
     addObject: function(info) {
