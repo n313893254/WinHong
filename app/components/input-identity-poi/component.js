@@ -19,7 +19,7 @@ export default Ember.Component.extend({
 
   actions: {
     add: function(member) {
-      this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => {
+      this.get('userStore').find('identity', null, {filter: {name: member.value}}).then(res => {
         this.set('allIdentities', res.content)
         let identities = this.get('allIdentities') || []
         let identity = identities.filter(i => i.login === member.value)[0] || null
@@ -81,7 +81,6 @@ export default Ember.Component.extend({
     let members = []
     let identities = this.get('allIdentities') || []
     identities.map(i => members.push({label: i.login, value: i.login}))
-    console.log(members)
     return members
   })
 

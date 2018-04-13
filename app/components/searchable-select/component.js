@@ -117,13 +117,6 @@ export default Ember.Component.extend({
 
   init() {
     this._super();
-    // this.get('userStore').find('identity', null, {filter: {name: 'ra'}}).then(res => {
-    //   let members = []
-    //   let identities = res.content || []
-    //   identities.map(i => members.push({label: i.login, value: i.login}))
-    //   console.log(members)
-    //   this.set('content', members)
-    // })
     this.observeContent();
   },
 
@@ -227,16 +220,10 @@ export default Ember.Component.extend({
     }
   }),
 
-  unGroupedContent: Ember.computed('filtered.[]', function () {
+  unGroupedContent: Ember.computed('content.[]', function () {
     const groupPath = this.get('optionGroupPath');
     const out = [];
-    this.get('filtered').forEach((opt) => {
-      const key = Ember.get(opt, groupPath);
-      if (!key) {
-        out.push(opt);
-      }
-    });
-    return out;
+    return this.get('content');
   }),
 
   groupedContent: Ember.computed('filtered.[]', function () {
@@ -411,7 +398,6 @@ export default Ember.Component.extend({
   },
 
   getIdentities: function (value) {
-    console.log(value)
     this.get('userStore').find('identity', null, {filter: {name: value}, forceReload: true}).then(res => {
       let members = []
       let identities = res.content || []
